@@ -46,6 +46,17 @@ app.post('/register', async (req, res) => {
   }
 })
 
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect:'/login',
+  failureFlash: true
+}))
+
+app.delete('/logout', (req, res) => {
+  //passport fn that clears session 
+  req.logOut();
+  res.redirect('/login')
+})
 
 app.get('/books', async (req, res) => {
 
