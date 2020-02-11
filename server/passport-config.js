@@ -4,17 +4,18 @@ const db = require('../database/database.js')
 
 function initiliaze(passport) {
   const authenticateUser = async (email, password, done) => {
-    //fn to obtail user object, obtain from model, need user to pass serialize again and compare hash with hashpass
-    const user = await db.one(`SELECT * FROM users WHERE email = $1`, [email]);
-
-    if (!user) {
-      //1st param = the error
-      //2nd param = user found
-      //3rd param = message
-      return done(null, false, {message: 'No user with that email'})
-    }
-
     try {
+      //fn to obtail user object, obtain from model, need user to pass serialize again and compare hash with hashpass
+      const user = await db.one(`SELECT * FROM users WHERE email = $1`, [email]).catch(err => {
+        console.log(err)
+      })
+      
+      if (!user) {
+        //1st param = the error
+        //2nd param = user found
+        //3rd param = message
+        return done(null, false, {message: 'No user with that email'})
+      }
 
       if (await bcrypt.compare(password, user.hashpass)) {
         return done(null, user)
