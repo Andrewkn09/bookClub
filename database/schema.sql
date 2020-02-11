@@ -33,10 +33,11 @@ CREATE TABLE books
 
 DROP TABLE IF EXISTS users;
 
+
 CREATE TABLE users
 (
   id serial PRIMARY KEY,
   name varchar(50) NOT NULL,
-  email varchar(50) NOT NULL,
+  email varchar(50) UNIQUE NOT NULL,
   hashpass varchar(60) NOT NULL 
 )
