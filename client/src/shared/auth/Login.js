@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import {hot} from 'react-hot-loader/root';
 
+import {handleLogin} from '../utils/api'
+
 function Login() {
   const [form, setForm] = useState({name: '', email: '', password: ''})
 
@@ -16,6 +18,7 @@ function Login() {
 
   const handleSubmit = e => {
     e.preventDefault();
+    handleLogin(form)
     console.log(form)
   }
 
