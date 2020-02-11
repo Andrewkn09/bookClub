@@ -10,6 +10,7 @@ const db = require('../database/database.js');
 
 const bcrypt = require("bcrypt")
 const passport = require('passport')
+const flash = require('express-flash')
 const session = require('express-session')
 const initilizePassport = require('./passport-config.js')
 initilizePassport(passport)
@@ -26,7 +27,7 @@ app.use(session({
 app.use(passport.initialize())
 //works with app.use session, store variables to be persisted across entire session
 app.use(passport.session())
-
+app.use(flash())
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/dist/')));
 
@@ -45,15 +46,29 @@ app.post('/register', async (req, res) => {
   } catch (err) {
     
     console.log(err)
-    res.redirect('/register')
+    res.redirect('/login')
+    // res.redirect('/register')
   }
 })
 
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect:'/login',
-  failureFlash: true
-}))
+// app.post('/login', passport.authenticate('local', {
+//   successRedirect: '/',
+//   failureRedirect:'/login',
+//   failureFlash: true
+// }))
+
+app.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    console.log(info)
+    if (err) { return next(err); }
+    if (!user) { return res.redirect('/login'); }
+
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/users/' + user.username);
+    });
+  })(req, res, next);
+});
 
 app.delete('/logout', (req, res) => {
   //passport fn that clears session 
@@ -62,7 +77,7 @@ app.delete('/logout', (req, res) => {
 })
 
 app.get('/books', async (req, res) => {
-
+  console.log(req.user)
   try {
     const bookList = await db.many(`SELECT * FROM books`);
 
@@ -105,7 +120,7 @@ app.post('/books', async (req, res) => {
   } 
 })
 
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/'))
 })
 
