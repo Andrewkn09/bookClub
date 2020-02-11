@@ -1,14 +1,13 @@
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
-//TODO: require db
+const db = require('../database/database.js')
 
 function initiliaze(passport) {
-  const authenticateUser = async (email, passport, done) => {
-    //fn to obtail user object, obtain from model
-    //TODO: make query to obtain user object with email
-    const user = getUserByEmail(email)
+  const authenticateUser = async (email, password, done) => {
+    //fn to obtail user object, obtain from model, need user to pass serialize again and compare hash with hashpass
+    const user = await db.one(`SELECT * FROM users WHERE email = $1`, [email]);
 
-    if (user === null) {
+    if (!user) {
       //1st param = the error
       //2nd param = user found
       //3rd param = message
@@ -16,7 +15,8 @@ function initiliaze(passport) {
     }
 
     try {
-      if (await bcrypt.compare(password, user.password)) {
+
+      if (await bcrypt.compare(password, user.hashpass)) {
         return done(null, user)
       } else {
         return done(null, false, {message: 'Password incorrect'})
@@ -30,7 +30,7 @@ function initiliaze(passport) {
     //what is uername called? default is username
     usernameField: 'email'
   }, 
-  //fn called that authenticates the user
+  //fn called that authenticates the user that takes in usernameField, password, done
   authenticateUser
   ))
 
@@ -41,9 +41,10 @@ function initiliaze(passport) {
   })
 
   //deserialize for use in req.use
-  passport.deserializeUser((id, done) => {
-    //TODO: make query to obtain user object with id
-    return done(null, getUserById(id))
+  passport.deserializeUser(async (id, done) => {
+    const user = await db.one(`SELECT * FROM users WHERE id = $1`, [id])
+
+    return done(null, user)
   })
 }
 
