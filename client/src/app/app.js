@@ -10,8 +10,8 @@ function App() {
       <h1>Book Clubs</h1>
 
       <Switch>
-        <Route path='/register' component={Register}/>
-        <Route path='/login' component={Login}/>
+        <Route exact path='/register' component={Register}/>
+        <Route exact path='/login' component={Login}/>
       </Switch>
     </div>
   )
