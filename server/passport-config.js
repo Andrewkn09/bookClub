@@ -2,8 +2,8 @@ const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 
 
-async function initiliaze(passport) {
-  const authenticateUser = (email, passport, done) => {
+function initiliaze(passport) {
+  const authenticateUser = async (email, passport, done) => {
     //fn to obtail user, obtain from model
     const user = getUserByEmail(email)
 
