@@ -13,22 +13,27 @@ app.get('/test', (req, res) => {
 })
 
 app.post('/books', async (req, res) => {
-  const {first, middle = null, last} = req.body;
+  const {title, author} = req.body;
+
   try {
-    const authorKey = await db.one(
-      `
-      INSERT INTO authors (first, middle, last) VALUES ($1, $2, $3) 
-      `,
-      [first, middle, last]
+    
+    const {id: authorKey} = await db.one(`INSERT INTO authors (name) VALUES ($1) RETURNING id`,
+          [author]
+      ).catch(err => {
+        return db.one(`SELECT id FROM authors WHERE name=$1 `, 
+          [author])
+      })
+
+      await db.one(`INSERT INTO books (title, author) VALUES ($1,$2)`,
+        [title, authorKey]
       )
-      console.log(authorKey)
+
       res.send('success')
     } catch (err) {
-      console.log(err)
-      res.send('fail')
-  }
 
-    
+      console.log(err)
+      res.sendStatus(500)
+  } 
 })
 
 const PORT = 3000;
