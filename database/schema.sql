@@ -12,6 +12,14 @@ CREATE TABLE authors
 -- CREATE UNIQUE INDEX auth_2col_uni_idx ON authors (first, last)
 -- WHERE middle IS NULL;
 
+DROP TABLE IF EXISTS genres CASCADE;
+
+CREATE TABLE genres
+(
+  id serial PRIMARY KEY,
+  genre varchar(50) UNIQUE NOT NULL
+);
+
 DROP TABLE IF EXISTS books;
 
 CREATE TABLE books
@@ -19,6 +27,7 @@ CREATE TABLE books
   id serial PRIMARY KEY,
   title varchar(50) NOT NULL ,
   author int NOT NULL references authors(id),
+  genre int NOT NULL references genres(id),
   date date 
 );
 
