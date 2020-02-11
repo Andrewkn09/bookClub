@@ -1,10 +1,11 @@
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
-
+//TODO: require db
 
 function initiliaze(passport) {
   const authenticateUser = async (email, passport, done) => {
-    //fn to obtail user, obtain from model
+    //fn to obtail user object, obtain from model
+    //TODO: make query to obtain user object with email
     const user = getUserByEmail(email)
 
     if (user === null) {
@@ -34,12 +35,14 @@ function initiliaze(passport) {
   ))
 
 
-  //serialize user to store inside
+  //serialize user for session
   passport.serializeUser((user, done) => {
     done(null, user.id)
   })
 
+  //deserialize for use in req.use
   passport.deserializeUser((id, done) => {
+    //TODO: make query to obtain user object with id
     return done(null, getUserById(id))
   })
 }

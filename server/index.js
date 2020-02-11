@@ -37,12 +37,13 @@ app.post('/register', async (req, res) => {
     //async fn that hashes password, 2nd arg = how secure
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
+    //TODO: check if insert is working
     db.none(`INSERT INTO users (name, email, password) VALUES ($1, $2, $3)`, 
     [name, email, hashedPassword])
 
-    res.sendStatus(200)
+    res.redirect('/login')
   } catch {
-    res.sendStatus(500)
+    res.redirect('/register')
   }
 })
 
