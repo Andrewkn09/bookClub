@@ -1,3 +1,3 @@
 module.exports = {
-  pgURI: 'postgres://admin@localhost:5432/bookClub',
+  pgURI: 'postgres://admin@localhost:5432/bookclub',
 }
