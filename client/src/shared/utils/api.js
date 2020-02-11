@@ -10,10 +10,10 @@ export const registerUser =  async (user) => {
   }
 }
 
-export const login =  async (user) => {
-  console.log(user)
+export const handleLogin =  async (user) => {
   try {
     const response = await axios.post('/login', user)
+    console.log(response.locals)
     return response
   } catch (err) {
     console.log(err)
