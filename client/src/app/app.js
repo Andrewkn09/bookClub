@@ -10,6 +10,7 @@ function App() {
       <h1>Book Clubs</h1>
 
       <Switch>
+        <Route exact path='/' />
         <Route exact path='/register' component={Register}/>
         <Route exact path='/login' component={Login}/>
       </Switch>
