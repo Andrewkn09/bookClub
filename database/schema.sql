@@ -28,6 +28,6 @@ CREATE TABLE books
   title varchar(50) NOT NULL ,
   author int NOT NULL references authors(id),
   genre int NOT NULL references genres(id),
-  date date 
+  date_added date DEFAULT CURRENT_DATE
 );
 
