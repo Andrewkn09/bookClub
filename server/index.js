@@ -105,6 +105,10 @@ app.post('/books', async (req, res) => {
   } 
 })
 
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/'))
+})
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Listening on port localhost:${PORT}`)
