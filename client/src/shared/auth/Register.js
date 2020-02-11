@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import {hot} from 'react-hot-loader/root';
 
+import {registerUser} from '../utils/api'
+
 function Register() {
   const [form, setForm] = useState({name: '', email: '', password: ''})
 
@@ -14,9 +16,15 @@ function Register() {
     })
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form)
+    try {
+      const response = await registerUser(form)
+      console.log('success')
+
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const {name, email, password} = form
