@@ -1,11 +1,39 @@
+if (process.env.NODE_ENV !== 'production') {
+  require ('dotenv').config
+}
+
 const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('../database/database.js');
 
+const bcrypt = require("bcrypt")
+const passport = require('passport')
+const initilizePassport = require('./passport-config.js')
+initilizePassport(passport)
+
+
+
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/dist/')));
+
+
+app.post('/register', async (req, res) => {
+  const {name, email} = req.body;
+
+  try {
+    //async fn that hashes password, 2nd arg = how secure
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+
+    db.none(`INSERT INTO users (name, email, password) VALUES ($1, $2, $3)`, 
+    [name, email, hashedPassword])
+
+    res.sendStatus(200)
+  } catch {
+    res.sendStatus(500)
+  }
+})
 
 
 app.get('/books', async (req, res) => {
@@ -16,7 +44,7 @@ app.get('/books', async (req, res) => {
     res.send({favorites: bookList})
 
   } catch (err) {
-    
+
     console.log(err)
     res.sendStatus(500)
   }
