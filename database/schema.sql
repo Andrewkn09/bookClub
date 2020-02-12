@@ -1,3 +1,13 @@
+DROP TABLE IF EXISTS users CASCADE;
+
+CREATE TABLE users
+(
+  id serial PRIMARY KEY,
+  name varchar(50) NOT NULL,
+  email varchar(50) UNIQUE NOT NULL,
+  hashpass varchar(60) NOT NULL 
+);
+
 DROP TABLE IF EXISTS authors CASCADE;
 
 CREATE TABLE authors
@@ -25,19 +35,11 @@ DROP TABLE IF EXISTS books;
 CREATE TABLE books
 (
   id serial PRIMARY KEY,
+  userID int NOT NULL references users(id),
   title varchar(50) NOT NULL ,
   author int NOT NULL references authors(id),
   genre int NOT NULL references genres(id),
+  notes varchar(500),
   date_added date DEFAULT CURRENT_DATE
 );
 
-DROP TABLE IF EXISTS users;
-
-
-CREATE TABLE users
-(
-  id serial PRIMARY KEY,
-  name varchar(50) NOT NULL,
-  email varchar(50) UNIQUE NOT NULL,
-  hashpass varchar(60) NOT NULL 
-)
