@@ -7,8 +7,9 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('../database/database.js');
+const authRoutes = require('./routes/authRoutes.js')
+const {isAuthenticated} = require('./middleware.js')
 
-const bcrypt = require("bcrypt")
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
@@ -23,6 +24,7 @@ app.use(session({
   //do you want to save empty value in session if there's no value
   saveUninitialized: false
 }))
+
 //passport fn that sets up basics need to start
 app.use(passport.initialize())
 //works with app.use session, store variables to be persisted across entire session
@@ -30,53 +32,9 @@ app.use(passport.session())
 app.use(flash())
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/dist/')));
+app.use('/', authRoutes)
 
-
-app.post('/register', async (req, res) => {
-  const {name, email, password} = req.body;
-
-  try {
-    //async fn that hashes password, 2nd arg = how secure
-    const hashedPassword = await bcrypt.hash(password, 10)
-
-    await db.none(`INSERT INTO users (name, email, hashpass) VALUES ($1, $2, $3)`, 
-    [name, email, hashedPassword])
-
-    res.redirect('/login')
-  } catch (err) {
-    
-    console.log(err)
-    res.redirect('/login')
-    // res.redirect('/register')
-  }
-})
-
-// app.post('/login', passport.authenticate('local', {
-//   successRedirect: '/',
-//   failureRedirect:'/login',
-//   failureFlash: true
-// }))
-
-app.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    console.log(info)
-    if (err) { return next(err); }
-    if (!user) { return res.redirect('/login'); }
-
-    req.logIn(user, function(err) {
-      if (err) { return next(err); }
-      return res.redirect('/users/' + user.username);
-    });
-  })(req, res, next);
-});
-
-app.delete('/logout', (req, res) => {
-  //passport fn that clears session 
-  req.logOut();
-  res.redirect('/login')
-})
-
-app.get('/books', async (req, res) => {
+app.get('/books', isAuthenticated, async (req, res) => {
   console.log(req.user)
   try {
     const bookList = await db.many(`SELECT * FROM books`);
@@ -120,7 +78,7 @@ app.post('/books', async (req, res) => {
   } 
 })
 
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/'))
 })
 
