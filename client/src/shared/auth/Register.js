@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import {hot} from 'react-hot-loader/root';
 
-import {registerUser} from '../utils/api'
+import {handleRegister} from '../utils/api'
 
-function Register() {
+function Register(props) {
   const [form, setForm] = useState({name: '', email: '', password: ''})
-
+  const [error, updateError] = useState('')
+ 
   const handleChange = e => {
     e.persist();
     setForm(prevState => {
@@ -19,17 +20,18 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await registerUser(form)
-      console.log('success')
-
+      await handleRegister(form)
+      window.location.assign('/login')
     } catch (err) {
-      console.log(err)
+      console.log(err.response.data)
+      updateError(err.response.data.message)
     }
   }
 
   const {name, email, password} = form
   return(
     <form onSubmit={handleSubmit}>
+      {error}
       <label>name</label>
       <input type='text' name='name' value={name} onChange={handleChange} required/>
       <label>email</label>
