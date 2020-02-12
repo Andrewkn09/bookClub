@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 export const handleRegister = async user => {
-  return await axios.post('/api/register', user);
+  return await axios.post('/api/auth/register', user);
 };
 
 export const handleLogin = async user => {
-  return await axios.post('/api/login', user);
+  return await axios.post('/api/auth/login', user);
 };
 
 export const fetchBooks = async () => {
@@ -13,7 +13,7 @@ export const fetchBooks = async () => {
 };
 
 export const fetchUser = async () => {
-  return await axios.get('/api/current_user');
+  return await axios.get('/api/auth/current_user');
 };
 
 export const postBook = async book => {
