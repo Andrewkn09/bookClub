@@ -40,7 +40,7 @@ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../client/dist/')));
 
-app.use('/', authRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api/books', bookRoutes);
 
 app.get('/*', (req, res) => {

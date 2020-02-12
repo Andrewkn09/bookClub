@@ -4,7 +4,7 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const db = require('../../database/database.js');
 
-router.post('/api/register', async (req, res) => {
+router.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
@@ -22,7 +22,7 @@ router.post('/api/register', async (req, res) => {
   }
 });
 
-router.post('/api/login', (req, res, next) => {
+router.post('/login', (req, res, next) => {
   //info comes from passport-config flash message
   passport.authenticate('local', (err, user, info) => {
     if (err) {
@@ -42,7 +42,7 @@ router.post('/api/login', (req, res, next) => {
   })(req, res, next);
 });
 
-router.get('/api/current_user', (req, res) => {
+router.get('/current_user', (req, res) => {
   if (req.user) {
     //destructure to not include hashpassword
     const { id, name, email } = req.user;
@@ -52,7 +52,7 @@ router.get('/api/current_user', (req, res) => {
   }
 });
 
-router.get('/api/logout', (req, res) => {
+router.get('/logout', (req, res) => {
   //passport fn that clears session
   req.logOut();
   req.session = null;
