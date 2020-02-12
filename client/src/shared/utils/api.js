@@ -1,23 +1,11 @@
 import axios from 'axios';
 
-export const registerUser =  async (user) => {
-  console.log(user)
-  try {
-    const response = await axios.post('/register', user)
-    return response
-  } catch (err) {
-    console.log(err)
-  }
+export const handleRegister =  async (user) => {
+  return await axios.post('/api/register', user)
 }
 
 export const handleLogin =  async (user) => {
-  try {
-    const response = await axios.post('/login', user)
-    console.log(response.locals)
-    return response
-  } catch (err) {
-    console.log(err)
-  }
+  return  await axios.post('/api/login', user)
 }
 
 
