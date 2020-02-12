@@ -3,11 +3,11 @@ import { fetchBooks } from '../../shared/utils/api.js';
 
 export const booksFetched = () => async dispatch => {
   try {
-    let books = await fetchBooks();
+    let { data } = await fetchBooks();
 
     dispatch({
-      type: BOOKS_ADDED,
-      payload: books.data,
+      type: BOOKS_FETCHED,
+      payload: data,
     });
   } catch (err) {
     console.log(err);

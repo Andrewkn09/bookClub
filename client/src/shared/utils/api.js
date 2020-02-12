@@ -9,9 +9,13 @@ export const handleLogin = async user => {
 };
 
 export const fetchBooks = async () => {
-  return await axios.get('/books');
+  return await axios.get('/api/books');
 };
 
 export const fetchUser = async () => {
   return await axios.get('/api/current_user');
+};
+
+export const postBook = async book => {
+  return await axios.post('/api/books', book);
 };
