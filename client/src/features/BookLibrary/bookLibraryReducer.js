@@ -1,4 +1,4 @@
-import { BOOKS_ADDED } from '../../shared/types.js';
+import { BOOKS_ADDED } from '../../shared/utils/types.js';
 
 const booksAdded = (state = [], { type, payload }) => {
   switch (type) {
