@@ -1,5 +1,5 @@
+// import {hot} from 'react-hot-loader/root';
 import React, {useState} from 'react'
-import {hot} from 'react-hot-loader/root';
 
 import {handleRegister} from '../utils/api'
 
@@ -32,7 +32,7 @@ function Register(props) {
   return(
     <form onSubmit={handleSubmit}>
       {error}
-      <label>name</label>
+      <label>names</label>
       <input type='text' name='name' value={name} onChange={handleChange} required/>
       <label>email</label>
       <input type='text' name='email' value={email} onChange={handleChange} required/>
@@ -45,5 +45,6 @@ function Register(props) {
   
 }
 
-export default hot(Register)
+// export default hot(Register)
 
+export default Register

@@ -1,6 +1,6 @@
+import {hot} from 'react-hot-loader/root';
 import React from 'react';
 import {Switch, Route} from 'react-router-dom'
-import {hot} from 'react-hot-loader/root';
 import Books from '../features/BookLibrary/BookLibrary.js'
 import Register from '../shared/auth/Register'
 import Login from '../shared/auth/Login'
