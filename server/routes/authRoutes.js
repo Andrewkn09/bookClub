@@ -23,12 +23,12 @@ router.post('/api/register', async (req, res) => {
 router.post('/api/login', (req, res, next) => {
   //info comes from passport-config flash message
   passport.authenticate('local', (err, user, info) => {
-    if (err) { return next(err); }
+    if (err) {  return res.sendStatus(500); }
     if (!user) { return res.status(500).send(info); }
 
     //login and redirect
     req.logIn(user, function(err) {
-      if (err) { return next(err); }
+      if (err) { return res.sendStatus(500); }
       return res.send('Successfully logged in')
     });
   })(req, res, next);
