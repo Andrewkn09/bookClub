@@ -11,3 +11,7 @@ export const handleLogin = async user => {
 export const fetchBooks = async () => {
   return await axios.get('/books');
 };
+
+export const fetchUser = async () => {
+  return await axios.get('/api/current_user');
+};
