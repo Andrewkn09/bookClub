@@ -1,8 +1,8 @@
-import { BOOKS_ADDED } from '../../shared/utils/types.js';
+import { BOOKS_FETCHED } from '../../shared/utils/types.js';
 
 const booksAdded = (state = [], { type, payload }) => {
   switch (type) {
-    case BOOKS_ADDED:
+    case BOOKS_FETCHED:
       return payload;
     default:
       return state;
