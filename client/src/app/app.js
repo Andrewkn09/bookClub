@@ -1,4 +1,3 @@
-import {hot} from 'react-hot-loader/root';
 import React from 'react';
 import {Switch, Route} from 'react-router-dom'
 import Books from '../features/BookLibrary/BookLibrary.js'
@@ -19,4 +18,4 @@ function App() {
   )
 }
 
-export default hot(App)
+export default App
