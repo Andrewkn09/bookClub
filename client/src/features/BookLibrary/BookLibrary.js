@@ -1,8 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import * as actions from './bookLibraryActions.js';
+import { postBook } from '../../shared/utils/api.js';
 
 const BookLibrary = props => {
-  return props.user ? (
+  const { user, books, booksFetched } = props;
+
+  useEffect(() => {
+    if (user) {
+      booksFetched().catch(err => {
+        console.log(err);
+      });
+    }
+  }, []);
+
+  const postBookAndUpdate = async book => {
+    try {
+      await postBook(book);
+      await booksFetched();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return user ? (
     <div>
       <h1>Books</h1>
     </div>
@@ -16,4 +37,4 @@ const mapStateToProps = state => ({
   books: state.books,
 });
 
-export default connect(mapStateToProps, null)(BookLibrary);
+export default connect(mapStateToProps, actions)(BookLibrary);
