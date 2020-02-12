@@ -5,6 +5,7 @@ import {handleLogin} from '../utils/api'
 
 function Login() {
   const [form, setForm] = useState({name: '', email: '', password: ''})
+  const [error, updateError] = useState('')
 
   const handleChange = e => {
     e.persist();
@@ -16,15 +17,24 @@ function Login() {
     })
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleLogin(form)
-    console.log(form)
+    
+    try {
+      e.preventDefault();
+      await handleLogin(form)
+      window.location.assign('/')
+
+    } catch (err) {
+      console.log(err.response.data)
+      updateError(err.response.data.message)
+    }
   }
 
   const {name, email, password} = form
   return(
     <form onSubmit={handleSubmit}>
+      {error}
       <label>name</label>
       <input type='text' name='name' value={name} onChange={handleChange} required/>
       <label>email</label>
