@@ -1,8 +1,9 @@
+const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 const db = require('../database/database.js')
 
-function initiliaze(passport) {
+function initilizePassport() {
   const authenticateUser = async (email, password, done) => {
     try {
       //fn to obtail user object, obtain from model, need user to pass serialize again and compare hash with hashpass
@@ -10,19 +11,22 @@ function initiliaze(passport) {
         console.log(err)
       })
       
+      //check if user exists
       if (!user) {
-        //1st param = the error
-        //2nd param = user found
-        //3rd param = message
+        //1st param = the error, 2nd param = user found, 3rd param = message, appears as info when calling passport.authenticate
         return done(null, false, {message: 'No user with that email'})
       }
 
-      if (await bcrypt.compare(password, user.hashpass)) {
-        return done(null, user)
-      } else {
+      //check if password matches
+      if (!await bcrypt.compare(password, user.hashpass)) {
         return done(null, false, {message: 'Password incorrect'})
       }
+
+      //suppllies passport with user to log in when calling passport.authenticate
+      return done(null, user)
+
     } catch (err) {
+
       return done(err)
     }
   }
@@ -50,4 +54,4 @@ function initiliaze(passport) {
 }
 
 
-module.exports = initiliaze;
+module.exports = initilizePassport;

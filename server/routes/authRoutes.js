@@ -26,9 +26,10 @@ router.post('/api/login', (req, res, next) => {
     if (err) { return next(err); }
     if (!user) { return res.status(500).send(info); }
 
+    //login and redirect
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      return res.redirect('/users/' + user.username);
+      return res.send('Successfully logged in')
     });
   })(req, res, next);
 });
@@ -39,9 +40,10 @@ router.get('/api/current_user', (req, res) => {
   res.send({id, name, email})
 })
 
-router.delete('/logout', (req, res) => {
+router.get('/api/logout', (req, res) => {
   //passport fn that clears session 
   req.logOut();
+  req.session = null
   res.redirect('/login')
 })
 
