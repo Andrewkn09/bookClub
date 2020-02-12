@@ -14,9 +14,17 @@ function App(props) {
   return (
     <div>
       <h1>Book Clubs</h1>
-      <Link to='/books'>books</Link>
-      <Link to='/register'>books</Link>
-      <Link to='/login'>books</Link>
+      <ul>
+        <li>
+          <Link to='/books'>books</Link>
+        </li>
+        <li>
+          <Link to='/register'>register</Link>
+        </li>
+        <li>
+          <Link to='/login'>login</Link>
+        </li>
+      </ul>
 
       <Switch>
         <Route exact path='/' />
