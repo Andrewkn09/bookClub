@@ -2,12 +2,12 @@ const { USER_FETCHED } = require('../utils/types.js');
 const { fetchUser } = require('../utils/api.js');
 
 export const userFetched = () => async dispatch => {
-  const user;
-  
+  let user = null;
+
   try {
     user = await fetchUser();
   } catch (err) {
-    user = false;
+    console.log('Must be logged in');
   }
 
   dispatch({
