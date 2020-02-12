@@ -1,6 +1,6 @@
 const { USER_FETCHED, USER_LOGOUT } = require('../utils/types.js');
 
-const userFetched = (state = null, { type, payload }) => {
+const authReducer = (state = null, { type, payload }) => {
   switch (type) {
     case USER_FETCHED:
       return payload;
@@ -11,4 +11,4 @@ const userFetched = (state = null, { type, payload }) => {
   }
 };
 
-export default userFetched;
+export default authReducer;
