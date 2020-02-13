@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from './bookLibraryActions.js';
 import { postBook } from '../../shared/utils/api.js';
+import BookLibraryList from './BookLibraryList.js';
+import PrimaryButton from '../../shared/buttons/PrimaryButton.js';
 
 const BookLibrary = props => {
   const { user, books, booksFetched } = props;
@@ -26,6 +28,8 @@ const BookLibrary = props => {
   return user ? (
     <div>
       <h1>Books</h1>
+      <PrimaryButton description='Add Book' />
+      <BookLibraryList bookList={books} />
     </div>
   ) : (
     <h1> Please Log in </h1>
