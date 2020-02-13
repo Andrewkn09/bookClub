@@ -5,9 +5,10 @@ import { postBook } from '../../shared/utils/api.js';
 import BookLibraryList from './BookLibraryList.js';
 import PrimaryButton from '../../shared/buttons/PrimaryButton.js';
 import Dialog from '../../shared/dialog/Dialog.js';
+import BookLibraryEntry from './BookLibraryEntry.js';
 
 const BookLibrary = props => {
-  const { user, books, booksFetched } = props;
+  const { user, books, booksFetched, bookPosted } = props;
   const [isOpen, toggleDialog] = useState(false);
 
   useEffect(() => {
@@ -28,10 +29,9 @@ const BookLibrary = props => {
 
   const postBookAndUpdate = async book => {
     try {
-      await postBook(book);
-      await booksFetched();
+      await bookPosted(book);
     } catch (err) {
-      console.log(err);
+      return err;
     }
   };
 
@@ -40,7 +40,7 @@ const BookLibrary = props => {
       <h1>Books</h1>
       <PrimaryButton description='Add Book' handleClick={handleOpenDialog} />
       <Dialog isOpen={isOpen} handleClose={handleCloseDialog}>
-        <h1>hi</h1>
+        <BookLibraryEntry postBookAndUpdate={postBookAndUpdate} />
       </Dialog>
       <BookLibraryList bookList={books} />
     </div>
