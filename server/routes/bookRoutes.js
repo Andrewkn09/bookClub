@@ -5,9 +5,16 @@ const { isAuthenticated } = require('../middleware.js');
 router.get('/', isAuthenticated, async (req, res) => {
   const { id } = req.user;
   try {
-    const bookList = await db.many(`SELECT * FROM books WHERE userId = $1`, [
-      id,
-    ]);
+    const bookList = await db.many(
+      `SELECT b.id, b.title, a.name, g.genre, b.notes, b.date_added
+        FROM books b
+          INNER JOIN authors a
+          ON b.author = a.id
+            INNER JOIN genres g
+            ON b.genre = g.id
+              WHERE userId = $1`,
+      [id]
+    );
 
     res.send({ favorites: bookList });
   } catch (err) {
