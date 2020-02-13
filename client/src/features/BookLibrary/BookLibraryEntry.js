@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 const BookLibraryEntry = props => {
-  const [book, updateBook] = useState({});
+  const [book, updateBook] = useState(props.initialState || {});
+  console.log('initial', props.initialState);
 
   const handleChange = e => {
     e.persist();
@@ -21,7 +22,6 @@ const BookLibraryEntry = props => {
       console.log(err);
     }
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <input
