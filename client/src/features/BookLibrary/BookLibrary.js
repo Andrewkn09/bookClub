@@ -35,6 +35,15 @@ const BookLibrary = props => {
     }
   };
 
+  const updateBookandUpdate = async book => {
+    try {
+      await props.bookUpdated(book);
+      await booksFetched();
+    } catch (err) {
+      return err;
+    }
+  };
+
   return user ? (
     <div>
       <h1>Books</h1>
@@ -42,7 +51,10 @@ const BookLibrary = props => {
       <Dialog isOpen={isOpen} handleClose={handleCloseDialog}>
         <BookLibraryEntry postBookAndUpdate={postBookAndUpdate} />
       </Dialog>
-      <BookLibraryList bookList={books} />
+      <BookLibraryList
+        bookList={books}
+        updateBookandUpdate={updateBookandUpdate}
+      />
     </div>
   ) : (
     <h1> Please Log in </h1>
