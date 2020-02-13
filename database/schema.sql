@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS authors CASCADE;
 CREATE TABLE authors
 (
   id serial PRIMARY KEY,
-  name varchar(50) UNIQUE NOT NULL
+  author varchar(50) UNIQUE NOT NULL
 );
 
 -- CREATE UNIQUE INDEX auth_3col_uni_idx ON authors (first, middle, last)

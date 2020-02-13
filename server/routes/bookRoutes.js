@@ -5,8 +5,8 @@ const { isAuthenticated } = require('../middleware.js');
 router.get('/', isAuthenticated, async (req, res) => {
   const { id } = req.user;
   try {
-    const bookList = await db.many(
-      `SELECT b.id, b.title, a.name, g.genre, b.notes, b.date_added
+    const bookList = await db.manyOrNone(
+      `SELECT b.id, b.title, a.author, g.genre, b.notes, b.date_added
         FROM books b
           INNER JOIN authors a
           ON b.author = a.id
@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
     const {
       id: authorKey,
     } = await db
-      .one(`INSERT INTO authors (name) VALUES ($1) RETURNING id`, [author])
+      .one(`INSERT INTO authors (author) VALUES ($1) RETURNING id`, [author])
       .catch(err => {
         return db.one(`SELECT id FROM authors WHERE name=$1 `, [author]);
       });
