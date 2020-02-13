@@ -7,7 +7,7 @@ export const booksFetched = () => async dispatch => {
 
     dispatch({
       type: BOOKS_FETCHED,
-      payload: data,
+      payload: data.favorites,
     });
   } catch (err) {
     console.log(err);
