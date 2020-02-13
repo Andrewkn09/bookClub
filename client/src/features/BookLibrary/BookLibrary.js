@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import * as actions from './bookLibraryActions.js';
-import { postBook } from '../../shared/utils/api.js';
 import BookLibraryList from './BookLibraryList.js';
 import PrimaryButton from '../../shared/buttons/PrimaryButton.js';
 import Dialog from '../../shared/dialog/Dialog.js';
@@ -30,6 +29,7 @@ const BookLibrary = props => {
   const postBookAndUpdate = async book => {
     try {
       await bookPosted(book);
+      await booksFetched();
     } catch (err) {
       return err;
     }
