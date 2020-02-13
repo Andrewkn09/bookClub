@@ -8,7 +8,7 @@ import authReducer from '../shared/auth/authReducer.js';
 const rootReducer = combineReducers({
   books: booksFetched,
   user: authReducer,
-  bookAdded: bookPosted,
+  bookPosted: bookPosted,
 });
 
 export default rootReducer;
