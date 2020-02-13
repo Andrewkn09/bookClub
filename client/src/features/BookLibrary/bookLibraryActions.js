@@ -45,21 +45,21 @@ export const bookPosted = book => async dispatch => {
   }
 };
 
-const bookRequest = (book, request, success, failure) => ({
-  type: request,
+const bookRequest = (book, type) => ({
+  type: type,
   payload: book,
 });
 
-const bookRequestSuccess = book => ({
-  type: success,
+const bookRequestSuccess = (book, type) => ({
+  type: type,
   payload: book,
   loading: false,
   loaded: true,
   lastUpdated: Date.now(),
 });
 
-const bookRequestFailure = (book, err) => ({
-  type: failure,
+const bookRequestFailure = (book, type, err) => ({
+  type: type,
   payload: book,
   error: err,
 });
