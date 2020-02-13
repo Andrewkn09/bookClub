@@ -36,7 +36,10 @@ const BookLibraryList = props => {
         );
       })}
       <Dialog isOpen={isOpen} handleClose={handleCloseDialog}>
-        <BookLibraryEntry initialState={selectedBook} />
+        <BookLibraryEntry
+          initialState={selectedBook}
+          updateBookandUpdate={props.updateBookandUpdate}
+        />
       </Dialog>
     </ul>
   );
