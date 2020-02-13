@@ -19,3 +19,7 @@ export const fetchUser = async () => {
 export const postBook = async book => {
   return await axios.post('/api/books', book);
 };
+
+export const updateBook = async book => {
+  return await axios.put('api/books', book);
+};
