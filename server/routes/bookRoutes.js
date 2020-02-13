@@ -24,7 +24,8 @@ router.get('/', isAuthenticated, async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const { title, author, genre, userid, notes } = req.body;
+  const { title, author, genre, notes } = req.body;
+  const userid = req.user.id;
   try {
     //obtain author key, add if doesn't exist
     const {
