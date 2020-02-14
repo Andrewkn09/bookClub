@@ -93,11 +93,21 @@ router.put('/', async (req, res) => {
     );
 
     console.log(response);
-    res.sendStatus(200);
+    res.sendStatus(201);
   } catch (err) {
     console.log(err);
     res.sendStatus(500);
   }
 });
 
+router.delete('/:bookId', async (req, res) => {
+  try {
+    await db.none(`DELETE FROM books WHERE id = $1`, [req.params.bookId]);
+
+    res.sendStatus(201);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+});
 module.exports = router;
