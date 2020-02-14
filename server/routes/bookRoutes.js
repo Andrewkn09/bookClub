@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
   try {
     //obtain author key, add if doesn't exist
     const {
-      id: authorKey,
+      id: authorId,
     } = await db
       .one(`INSERT INTO authors (author) VALUES ($1) RETURNING id`, [author])
       .catch(err => {
@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
 
     //obtain genre key, add if doesn't exist
     const {
-      id: genreKey,
+      id: genreId,
     } = await db
       .one(`INSERT INTO genres (genre) VALUES ($1) RETURNING id`, [genre])
       .catch(err => {
@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
     //add book into database
     await db.none(
       `INSERT INTO books (title, author, genre, userid, notes) VALUES ($1, $2, $3, $4, $5)`,
-      [title, authorKey, genreKey, userid, notes]
+      [title, authorId, genreId, userid, notes]
     );
 
     res.send('success');
