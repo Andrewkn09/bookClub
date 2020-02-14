@@ -22,7 +22,7 @@ const BookLibraryList = props => {
           <li key={book.id}>
             <div>
               <h3>Title: {book.title}</h3>
-              <h4>Author: {book.name}</h4>
+              <h4>Author: {book.author}</h4>
               <section>
                 <p>Genre:{book.genre}</p>
                 <p>Notes:{book.notes}</p>
