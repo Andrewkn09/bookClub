@@ -24,6 +24,9 @@ function App(props) {
         <li>
           <Link to='/login'>login</Link>
         </li>
+        <li>
+          <a href='/api/auth/logout'>logout</a>
+        </li>
       </ul>
 
       <Switch>
