@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import * as actions from './bookLibraryActions.js';
 import BookLibraryList from './BookLibraryList.js';
-import PrimaryButton from '../../shared/buttons/PrimaryButton.js';
 import Dialog from '../../shared/dialog/Dialog.js';
 import BookLibraryEntry from './BookLibraryEntry.js';
 import BookLibraryHeader from './BookLibraryHeader.js';
@@ -57,10 +56,10 @@ const BookLibrary = props => {
   return user ? (
     <div>
       <h1>Books</h1>
-      <PrimaryButton description='Add Book' handleClick={handleOpenDialog} />
       <BookLibraryHeader
         config={props.config}
         updateConfig={props.configUpdated}
+        handleAddBook={handleOpenDialog}
       />
       <Dialog isOpen={isOpen} handleClose={handleCloseDialog}>
         <BookLibraryEntry postBookAndUpdate={postBookAndUpdate} />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import PrimaryButton from '../../shared/buttons/PrimaryButton.js';
 //TODO: MOVE TO ANOTHER FILE
 const sortOptions = [
   {
@@ -48,6 +48,7 @@ const bookLibraryHeader = props => {
 
   return (
     <div>
+      <PrimaryButton description='Add Book' handleClick={props.handleAddBook} />
       <label>
         SortBy:
         <select value={config.sortBy} onChange={handleSelect} name='sortBy'>
