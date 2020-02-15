@@ -37,20 +37,22 @@ module.exports = {
   addAuthor: async authorName => {
     return await db.one(
       `INSERT INTO authors (author) VALUES ($1) RETURNING id`,
-      [authorName]
+      [authorName.toUpperCase()]
     );
   },
   getAuthorId: async authorName => {
     return await db.one(`SELECT id FROM authors WHERE author=$1 `, [
-      authorName,
+      authorName.toUpperCase(),
     ]);
   },
   addGenre: async genreName => {
     return await db.one(`INSERT INTO genres (genre) VALUES ($1) RETURNING id`, [
-      genreName,
+      genreName.toUpperCase(),
     ]);
   },
   getGenreId: async genreName => {
-    return await db.one(`SELECT id from genres WHERE genre=$1`, [genreName]);
+    return await db.one(`SELECT id from genres WHERE genre=$1`, [
+      genreName.toUpperCase(),
+    ]);
   },
 };
