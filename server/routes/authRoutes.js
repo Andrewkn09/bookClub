@@ -13,7 +13,7 @@ router.post('/register', async (req, res) => {
 
     await db.none(
       `INSERT INTO users (name, email, hashpass) VALUES ($1, $2, $3)`,
-      [name, email, hashedPassword]
+      [name, email.toLowerCase(), hashedPassword]
     );
     res.send('success');
   } catch (err) {

@@ -9,7 +9,7 @@ function initilizePassport() {
     try {
       //fn to obtail user object, obtain from model, need user to pass serialize again and compare hash with hashpass
       const user = await db.oneOrNone(`SELECT * FROM users WHERE email = $1`, [
-        email,
+        email.toLowerCase(),
       ]);
 
       //check if user exists
