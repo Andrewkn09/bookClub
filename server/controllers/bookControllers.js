@@ -3,9 +3,10 @@ const model = require('../models/bookModels.js');
 module.exports = {
   getBooks: async (req, res) => {
     const { id } = req.user;
-    const { page = 1, limit = 5, sort = 'title', order = 'ASC' } = req.params;
-    //page 1 -> no offset
-    const offset = page === 1 ? 0 : page * limit;
+    const { page = 1, limit = 5, sortBy = 'title_ASC' } = req.params;
+    const sort = sortBy.split('_')[0];
+    const order = sortBy.split('_')[1];
+    const offset = parseInt(page) === 1 ? 0 : page * limit;
 
     try {
       const bookList = await model.getBookList(id, sort, order, limit, offset);
