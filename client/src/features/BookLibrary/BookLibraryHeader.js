@@ -30,11 +30,11 @@ const sortOptions = [
   },
 ];
 
-const defaultConfig = {
-  page: 1,
-  limit: 5,
-  sortBy: 'TITLE_ASC',
-};
+const countOptions = [
+  { key: 1, desc: 5 },
+  { key: 2, desc: 10 },
+  { key: 3, desc: 20 },
+];
 
 const bookLibraryHeader = props => {
   const handleSelect = async e => {
@@ -50,6 +50,13 @@ const bookLibraryHeader = props => {
         name='sortBy'
         value={props.config.sortBy}
         options={sortOptions}
+        onChange={handleSelect}
+      />
+      <PrimarySelect
+        label='Limit'
+        name='limit'
+        value={props.config.limit}
+        options={countOptions}
         onChange={handleSelect}
       />
 
