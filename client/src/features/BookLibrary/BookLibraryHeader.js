@@ -52,6 +52,8 @@ const bookLibraryHeader = props => {
         options={sortOptions}
         onChange={handleSelect}
       />
+
+      <PrimaryButton description='Update' handleClick={props.updateList} />
     </div>
   );
 };

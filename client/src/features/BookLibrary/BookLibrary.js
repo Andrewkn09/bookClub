@@ -60,6 +60,7 @@ const BookLibrary = props => {
         config={props.config}
         updateConfig={props.configUpdated}
         handleAddBook={handleOpenDialog}
+        updateList={props.booksFetched}
       />
       <Dialog isOpen={isOpen} handleClose={handleCloseDialog}>
         <BookLibraryEntry postBookAndUpdate={postBookAndUpdate} />
