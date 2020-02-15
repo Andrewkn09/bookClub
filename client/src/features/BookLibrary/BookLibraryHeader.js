@@ -28,24 +28,29 @@ const sortOptions = [
   },
 ];
 
-const bookLibraryNav = props => {
-  const [sortSelect, updateSelect] = useState('TITLE_ASC');
-  const [countSelect, updateCount] = useState(5);
+const defaultConfig = {
+  page: 1,
+  limit: 5,
+  sortBy: 'TITLE_ASC',
+};
+
+const bookLibraryHeader = props => {
+  const [config, updateConfig] = useState(defaultConfig);
 
   const handleSelect = e => {
     const { name, value } = e.target;
-    if (name === 'sort') {
-      updateSelect(value);
-    } else if (name === 'count') {
-      updateCount(value);
-    }
+    updateConfig(prevState => {
+      return { ...prevState, [name]: value };
+    });
+
+    props.updateConfig(config);
   };
 
   return (
     <div>
       <label>
         SortBy:
-        <select value={sortSelect} onChange={handleSelect} name='sort'>
+        <select value={config.sortBy} onChange={handleSelect} name='sortBy'>
           {sortOptions.map(sort => {
             return (
               <option key={sort.id} value={sort.desc}>
@@ -59,4 +64,4 @@ const bookLibraryNav = props => {
   );
 };
 
-export default bookLibraryNav;
+export default bookLibraryHeader;
