@@ -23,3 +23,7 @@ export const postBook = async book => {
 export const updateBook = async book => {
   return await axios.put('api/books', book);
 };
+
+export const deleteBook = async ({ bookId }) => {
+  return await axios.delete(`api/books/${bookId}`);
+};
