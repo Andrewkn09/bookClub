@@ -32,13 +32,16 @@ const BookLibraryList = props => {
             <button id={i} onClick={handleOpenDialog}>
               Edit
             </button>
+            <button id={i} onClick={props.handleDeleteAndUpdate}>
+              Delete
+            </button>
           </li>
         );
       })}
       <Dialog isOpen={isOpen} handleClose={handleCloseDialog}>
         <BookLibraryEntry
           initialState={selectedBook}
-          updateBookandUpdate={props.updateBookandUpdate}
+          updateBookandUpdate={props.updateBookAndUpdate}
         />
       </Dialog>
     </ul>
