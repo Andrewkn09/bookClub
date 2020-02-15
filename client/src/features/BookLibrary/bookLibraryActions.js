@@ -10,7 +10,12 @@ import {
   BOOK_DELETED_SUCCESS,
   BOOK_DELETED_FAILURE,
 } from '../../shared/utils/types.js';
-import { fetchBooks, postBook, updateBook } from '../../shared/utils/api.js';
+import {
+  fetchBooks,
+  postBook,
+  updateBook,
+  deleteBook,
+} from '../../shared/utils/api.js';
 
 export const booksFetched = () => async dispatch => {
   try {
@@ -69,7 +74,7 @@ export const bookDeleted = bookId => async dispatch => {
   const book = { bookId };
   dispatch(bookRequest(book, BOOK_DELETED_REQUEST));
   try {
-    await updateBook(book);
+    await deleteBook(book);
     dispatch(bookRequestSuccess(book, BOOK_DELETED_SUCCESS));
   } catch (err) {
     dispatch(bookRequestFailure(book, err, BOOK_DELETED_FAILURE));
