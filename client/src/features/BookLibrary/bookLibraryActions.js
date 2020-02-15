@@ -50,10 +50,10 @@ const bookRequestFailure = (book, type, err) => ({
 });
 
 export const bookPosted = book => async dispatch => {
-  dispatch(bookRequest(book));
+  dispatch(bookRequest(book, BOOK_POSTED_REQUEST));
 
   try {
-    await postBook(book, BOOK_POSTED_REQUEST);
+    await postBook(book);
     dispatch(bookRequestSuccess(book, BOOK_POSTED_SUCCESS));
   } catch (err) {
     dispatch(bookRequestFailure(book, BOOK_POSTED_FAILURE, err));
