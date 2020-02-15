@@ -18,9 +18,11 @@ import {
   deleteBook,
 } from '../../shared/utils/api.js';
 
-export const booksFetched = () => async dispatch => {
+export const booksFetched = () => async (dispatch, getState) => {
+  const { config } = getState();
+
   try {
-    let { data } = await fetchBooks();
+    let { data } = await fetchBooks(config);
 
     dispatch({
       type: BOOKS_FETCHED,
