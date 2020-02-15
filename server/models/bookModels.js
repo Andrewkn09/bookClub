@@ -1,7 +1,7 @@
 const db = require('../../database/database.js');
 
 module.exports = {
-  getBookList: async userId => {
+  getBookList: async (userId, sort, order, limit, offset) => {
     return await db.manyOrNone(
       `SELECT b.id, b.title, a.author, g.genre, b.notes, b.date_added
         FROM books b
@@ -9,8 +9,11 @@ module.exports = {
           ON b.author = a.id
             INNER JOIN genres g
             ON b.genre = g.id
-        WHERE userId = $1`,
-      [userId]
+        WHERE userId = $1
+        ORDER BY $2:alias $3:alias
+        LIMIT $4
+        OFFSET $5`,
+      [userId, sort, order, limit, offset]
     );
   },
   addBook: async (title, authorId, genreId, userId, notes) => {
