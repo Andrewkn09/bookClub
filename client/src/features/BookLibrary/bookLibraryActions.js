@@ -6,6 +6,9 @@ import {
   BOOK_UPDATED_REQUEST,
   BOOK_UPDATED_SUCCESS,
   BOOK_UPDATED_FAILURE,
+  BOOK_DELETED_REQUEST,
+  BOOK_DELETED_SUCCESS,
+  BOOK_DELETED_FAILURE,
 } from '../../shared/utils/types.js';
 import { fetchBooks, postBook, updateBook } from '../../shared/utils/api.js';
 
@@ -19,29 +22,6 @@ export const booksFetched = () => async dispatch => {
     });
   } catch (err) {
     console.log(err);
-  }
-};
-
-export const bookPosted = book => async dispatch => {
-  dispatch({
-    type: BOOK_POSTED_REQUEST,
-    payload: book,
-  });
-
-  try {
-    await postBook(book);
-
-    dispatch({
-      type: BOOK_POSTED_SUCCESS,
-      loading: false,
-      loaded: true,
-      lastUpdated: Date.now(),
-    });
-  } catch (err) {
-    dispatch({
-      type: BOOK_POSTED_FAILURE,
-      payload: err,
-    });
   }
 };
 
@@ -64,12 +44,33 @@ const bookRequestFailure = (book, type, err) => ({
   error: err,
 });
 
+export const bookPosted = book => async dispatch => {
+  dispatch(bookRequest(book));
+
+  try {
+    await postBook(book, BOOK_POSTED_REQUEST);
+    dispatch(bookRequestSuccess(book, BOOK_POSTED_SUCCESS));
+  } catch (err) {
+    dispatch(bookRequestFailure(book, BOOK_POSTED_FAILURE, err));
+  }
+};
+
 export const bookUpdated = book => async dispatch => {
   dispatch(bookRequest(book, BOOK_UPDATED_REQUEST));
   try {
     await updateBook(book);
     dispatch(bookRequestSuccess(book, BOOK_UPDATED_SUCCESS));
   } catch (err) {
-    dispatch(bookRequestFailure(err, BOOK_UPDATED_FAILURE));
+    dispatch(bookRequestFailure(book, err, BOOK_UPDATED_FAILURE));
+  }
+};
+
+export const bookDeleted = bookId => async dispatch => {
+  dispatch(bookRequest(bookId, BOOK_DELETED_REQUEST));
+  try {
+    await updateBook(bookId);
+    dispatch(bookRequestSuccess(bookId, BOOK_DELETED_SUCCESS));
+  } catch (err) {
+    dispatch(bookRequestFailure(bookId, err, BOOK_DELETED_FAILURE));
   }
 };
