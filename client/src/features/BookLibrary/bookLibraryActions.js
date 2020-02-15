@@ -66,11 +66,12 @@ export const bookUpdated = book => async dispatch => {
 };
 
 export const bookDeleted = bookId => async dispatch => {
-  dispatch(bookRequest(bookId, BOOK_DELETED_REQUEST));
+  const book = { bookId };
+  dispatch(bookRequest(book, BOOK_DELETED_REQUEST));
   try {
-    await updateBook(bookId);
-    dispatch(bookRequestSuccess(bookId, BOOK_DELETED_SUCCESS));
+    await updateBook(book);
+    dispatch(bookRequestSuccess(book, BOOK_DELETED_SUCCESS));
   } catch (err) {
-    dispatch(bookRequestFailure(bookId, err, BOOK_DELETED_FAILURE));
+    dispatch(bookRequestFailure(book, err, BOOK_DELETED_FAILURE));
   }
 };
