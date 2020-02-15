@@ -5,6 +5,7 @@ import BookLibraryList from './BookLibraryList.js';
 import PrimaryButton from '../../shared/buttons/PrimaryButton.js';
 import Dialog from '../../shared/dialog/Dialog.js';
 import BookLibraryEntry from './BookLibraryEntry.js';
+import BookLibrarynav from './BookLibraryNav.js';
 
 const BookLibrary = props => {
   const { user, books, booksFetched, bookPosted } = props;
@@ -57,6 +58,7 @@ const BookLibrary = props => {
     <div>
       <h1>Books</h1>
       <PrimaryButton description='Add Book' handleClick={handleOpenDialog} />
+      <BookLibrarynav />
       <Dialog isOpen={isOpen} handleClose={handleCloseDialog}>
         <BookLibraryEntry postBookAndUpdate={postBookAndUpdate} />
       </Dialog>
@@ -74,6 +76,7 @@ const BookLibrary = props => {
 const mapStateToProps = state => ({
   user: state.user,
   books: state.books,
+  config: state.config,
 });
 
 export default connect(mapStateToProps, actions)(BookLibrary);
