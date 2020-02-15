@@ -9,6 +9,7 @@ import {
   BOOK_DELETED_REQUEST,
   BOOK_DELETED_SUCCESS,
   BOOK_DELETED_FAILURE,
+  CONFIG_UPDATED,
 } from '../../shared/utils/types.js';
 
 export const booksFetched = (state = [], { type, payload }) => {
@@ -109,6 +110,16 @@ export const bookDeleted = (state = initialState, action) => {
         error: action.err,
       });
 
+    default:
+      return state;
+  }
+};
+
+const initialConfig = { page: 1, limit: 5, sortBy: 'TITLE_ASC' };
+export const configUpdated = (state = initialConfig, action) => {
+  switch (action.type) {
+    case CONFIG_UPDATED:
+      return payload;
     default:
       return state;
   }
