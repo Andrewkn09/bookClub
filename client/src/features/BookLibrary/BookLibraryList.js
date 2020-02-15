@@ -21,7 +21,7 @@ const BookLibraryList = props => {
 
   return (
     <ul>
-      {props.bookList.map(book => {
+      {props.bookList.map((book, i) => {
         return (
           <li key={book.id}>
             <div>
@@ -33,7 +33,7 @@ const BookLibraryList = props => {
                 <p>Date Added: {book.date_added}</p>
               </section>
             </div>
-            <button id={book.id} onClick={handleOpenDialog}>
+            <button id={i} onClick={handleOpenDialog}>
               Edit
             </button>
             <button id={book.id} onClick={handleDelete}>
