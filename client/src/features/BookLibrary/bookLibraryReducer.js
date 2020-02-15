@@ -116,8 +116,8 @@ export const bookDeleted = (state = initialState, action) => {
 };
 
 const initialConfig = { page: 1, limit: 5, sortBy: 'TITLE_ASC' };
-export const configUpdated = (state = initialConfig, action) => {
-  switch (action.type) {
+export const configUpdated = (state = initialConfig, { type, payload }) => {
+  switch (type) {
     case CONFIG_UPDATED:
       return payload;
     default:
