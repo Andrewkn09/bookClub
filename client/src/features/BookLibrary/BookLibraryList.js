@@ -15,6 +15,10 @@ const BookLibraryList = props => {
     toggleDialog(false);
   };
 
+  const handleDelete = e => {
+    props.deleteBookAndUpdate(e.target.id);
+  };
+
   return (
     <ul>
       {props.bookList.map((book, i) => {
@@ -32,7 +36,7 @@ const BookLibraryList = props => {
             <button id={i} onClick={handleOpenDialog}>
               Edit
             </button>
-            <button id={i} onClick={props.handleDeleteAndUpdate}>
+            <button id={i} onClick={handleDelete}>
               Delete
             </button>
           </li>
