@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
 import PrimaryButton from '../../shared/buttons/PrimaryButton.js';
+import PrimarySelect from '../../shared/selects/PrimarySelect.js';
+
 //TODO: MOVE TO ANOTHER FILE
 const sortOptions = [
   {
-    id: 1,
+    key: 1,
     desc: 'TITLE_ASC',
   },
   {
-    id: 2,
+    key: 2,
     desc: 'TITLE_DESC',
   },
   {
-    id: 3,
+    key: 3,
     desc: 'AUTHOR_ASC',
   },
   {
-    id: 4,
+    key: 4,
     desc: 'AUTHOR_DESC',
   },
   {
-    id: 5,
+    key: 5,
     desc: 'GENRE_ASC',
   },
   {
-    id: 6,
+    key: 6,
     desc: 'GENRE_DESC',
   },
 ];
@@ -35,32 +37,21 @@ const defaultConfig = {
 };
 
 const bookLibraryHeader = props => {
-  const [config, updateConfig] = useState(defaultConfig);
-
-  const handleSelect = e => {
+  const handleSelect = async e => {
     const { name, value } = e.target;
-    updateConfig(prevState => {
-      return { ...prevState, [name]: value };
-    });
-
-    props.updateConfig(config);
+    props.updateConfig({ ...props.config, [name]: value });
   };
 
   return (
     <div>
       <PrimaryButton description='Add Book' handleClick={props.handleAddBook} />
-      <label>
-        SortBy:
-        <select value={config.sortBy} onChange={handleSelect} name='sortBy'>
-          {sortOptions.map(sort => {
-            return (
-              <option key={sort.id} value={sort.desc}>
-                {sort.desc}
-              </option>
-            );
-          })}
-        </select>
-      </label>
+      <PrimarySelect
+        label='SortBy'
+        name='sortBy'
+        value={props.config.sortBy}
+        options={sortOptions}
+        onChange={handleSelect}
+      />
     </div>
   );
 };
