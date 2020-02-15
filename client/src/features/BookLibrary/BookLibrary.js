@@ -62,7 +62,7 @@ const BookLibrary = props => {
       </Dialog>
       <BookLibraryList
         bookList={books}
-        updateBookandUpdate={updateBookAndUpdate}
+        updateBookAndUpdate={updateBookAndUpdate}
         deleteBookAndUpdate={deleteBookAndUpdate}
       />
     </div>
