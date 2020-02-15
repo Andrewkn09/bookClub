@@ -13,7 +13,7 @@ module.exports = {
         ORDER BY $2:alias $3:alias
         LIMIT $4
         OFFSET $5`,
-      [userId, sort, order, limit, offset]
+      [userId, sort.toLowerCase(), order, limit, offset]
     );
   },
   addBook: async (title, authorId, genreId, userId, notes) => {
