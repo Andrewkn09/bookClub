@@ -8,8 +8,17 @@ export const handleLogin = async user => {
   return await axios.post('/api/auth/login', user);
 };
 
-export const fetchBooks = async () => {
-  return await axios.get('/api/books');
+export const fetchBooks = async (page, limit, sortBy = 'title ASC') => {
+  const sort = sortBy.split(' ')[0];
+  const order = sortBy.split(' ')[1];
+  return await axios.get('/api/books', {
+    params: {
+      page,
+      limit,
+      sort,
+      order,
+    },
+  });
 };
 
 export const fetchUser = async () => {
