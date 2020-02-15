@@ -6,6 +6,9 @@ import {
   BOOK_UPDATED_REQUEST,
   BOOK_UPDATED_SUCCESS,
   BOOK_UPDATED_FAILURE,
+  BOOK_DELETED_REQUEST,
+  BOOK_DELETED_SUCCESS,
+  BOOK_DELETED_FAILURE,
 } from '../../shared/utils/types.js';
 
 export const booksFetched = (state = [], { type, payload }) => {
@@ -31,6 +34,7 @@ export const bookPosted = (state = initialState, action) => {
         payload: action.payload,
         loading: true,
         loaded: false,
+        error: null,
       });
 
     case BOOK_POSTED_SUCCESS:
@@ -59,6 +63,7 @@ export const bookUpdated = (state = initialState, action) => {
         payload: action.payload,
         loading: true,
         loaded: false,
+        error: null,
       });
 
     case BOOK_UPDATED_SUCCESS:
@@ -69,6 +74,35 @@ export const bookUpdated = (state = initialState, action) => {
       });
 
     case BOOK_UPDATED_FAILURE:
+      return Object.assign({}, state, {
+        loading: false,
+        loaded: false,
+        error: action.err,
+      });
+
+    default:
+      return state;
+  }
+};
+
+export const bookDeleted = (state = initialState, action) => {
+  switch (action.type) {
+    case BOOK_DELETED_REQUEST:
+      return Object.assign({}, state, {
+        payload: action.payload,
+        loading: true,
+        loaded: false,
+        error: null,
+      });
+
+    case BOOK_DELETED_SUCCESS:
+      return Object.assign({}, state, {
+        loading: false,
+        loaded: true,
+        lastUpdated: Date.now(),
+      });
+
+    case BOOK_DELETED_FAILURE:
       return Object.assign({}, state, {
         loading: false,
         loaded: false,
