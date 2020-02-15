@@ -31,16 +31,25 @@ const BookLibrary = props => {
       await bookPosted(book);
       await booksFetched();
     } catch (err) {
-      return err;
+      console.log(err);
     }
   };
 
-  const updateBookandUpdate = async book => {
+  const updateBookAndUpdate = async book => {
     try {
       await props.bookUpdated(book);
       await booksFetched();
     } catch (err) {
-      return err;
+      console.log(err);
+    }
+  };
+
+  const deleteBookAndUpdate = async bookId => {
+    try {
+      await props.bookDeleted(bookId);
+      await booksFetched();
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -53,7 +62,8 @@ const BookLibrary = props => {
       </Dialog>
       <BookLibraryList
         bookList={books}
-        updateBookandUpdate={updateBookandUpdate}
+        updateBookandUpdate={updateBookAndUpdate}
+        deleteBookAndUpdate={deleteBookAndUpdate}
       />
     </div>
   ) : (
