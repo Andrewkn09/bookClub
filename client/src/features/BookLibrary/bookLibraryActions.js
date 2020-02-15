@@ -9,6 +9,7 @@ import {
   BOOK_DELETED_REQUEST,
   BOOK_DELETED_SUCCESS,
   BOOK_DELETED_FAILURE,
+  CONFIG_UPDATED,
 } from '../../shared/utils/types.js';
 import {
   fetchBooks,
@@ -79,4 +80,11 @@ export const bookDeleted = bookId => async dispatch => {
   } catch (err) {
     dispatch(bookRequestFailure(book, err, BOOK_DELETED_FAILURE));
   }
+};
+
+export const configUpdated = config => {
+  dispatch({
+    type: CONFIG_UPDATED,
+    payload: config,
+  });
 };
