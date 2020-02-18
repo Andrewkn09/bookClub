@@ -6,6 +6,8 @@ import Register from '../shared/auth/Register';
 import Login from '../shared/auth/Login';
 import * as actions from '../shared/auth/authActions';
 
+import './app.scss';
+
 function App(props) {
   useEffect(() => {
     props.userFetched();
@@ -14,20 +16,24 @@ function App(props) {
   return (
     <div>
       <h1>Book Clubs</h1>
-      <ul>
-        <li>
-          <Link to='/books'>books</Link>
-        </li>
-        <li>
-          <Link to='/register'>register</Link>
-        </li>
-        <li>
-          <Link to='/login'>login</Link>
-        </li>
-        <li>
-          <a href='/api/auth/logout'>logout</a>
-        </li>
-      </ul>
+      <nav>
+        <ul>
+          <li>
+            <Link to='/books'>books</Link>
+          </li>
+          <div className='authHeader'>
+            <li>
+              <Link to='/register'>register</Link>
+            </li>
+            <li>
+              <Link to='/login'>login</Link>
+            </li>
+            <li>
+              <a href='/api/auth/logout'>logout</a>
+            </li>
+          </div>
+        </ul>
+      </nav>
 
       <Switch>
         <Route exact path='/' />
