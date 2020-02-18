@@ -9,8 +9,15 @@ export const handleLogin = async user => {
 };
 
 export const fetchBooks = async config => {
-  const { page, limit, sortBy } = config;
-  return await axios.get(`/api/books/${page}/${limit}/${sortBy}`);
+  const { query = '', page, limit, sortBy } = config;
+  return await axios.get(`/api/books`, {
+    params: {
+      query: query,
+      page: page,
+      limit: limit,
+      sortBy: sortBy,
+    },
+  });
 };
 
 export const fetchUser = async () => {
