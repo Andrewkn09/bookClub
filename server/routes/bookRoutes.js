@@ -7,7 +7,7 @@ const {
   deleteBook,
 } = require('../controllers/bookControllers.js');
 
-router.get('/:page?/:limit?/:sortBy?', isAuthenticated, getBooks);
+router.get('/', isAuthenticated, getBooks);
 
 router.post('/', postBook);
 
