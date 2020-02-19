@@ -1,18 +1,9 @@
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
-.authHeader {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
-
-  li {
-    margin-left: 10px;
-  }
+body {
+  margin: 0 8%;
 }
