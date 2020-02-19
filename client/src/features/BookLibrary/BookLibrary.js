@@ -5,6 +5,7 @@ import BookLibraryList from './bookLibraryList/BookLibraryList.js';
 import Dialog from '../../shared/dialog/Dialog.js';
 import BookLibraryEntry from './BookLibraryEntry.js';
 import BookLibraryHeader from './bookLibraryHeader/BookLibraryHeader.js';
+import BookPagination from './bookPagination/BookPagination.js';
 
 const BookLibrary = props => {
   const { user, books, booksFetched, bookPosted } = props;
@@ -68,6 +69,10 @@ const BookLibrary = props => {
         bookList={books}
         updateBookAndUpdate={updateBookAndUpdate}
         deleteBookAndUpdate={deleteBookAndUpdate}
+      />
+      <BookPagination
+        config={props.config}
+        updateConfig={props.configUpdated}
       />
     </div>
   ) : (
