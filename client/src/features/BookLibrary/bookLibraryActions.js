@@ -84,7 +84,11 @@ export const bookDeleted = bookId => async dispatch => {
   }
 };
 
-export const configUpdated = config => ({
-  type: CONFIG_UPDATED,
-  payload: config,
-});
+export const configUpdated = config => async dispatch => {
+  await dispatch({
+    type: CONFIG_UPDATED,
+    payload: config,
+  });
+
+  await dispatch(booksFetched());
+};
