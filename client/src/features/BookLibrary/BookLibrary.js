@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import * as actions from './bookLibraryActions.js';
-import BookLibraryList from './BookLibraryList.js';
+import BookLibraryList from './bookLibraryList/BookLibraryList.js';
 import Dialog from '../../shared/dialog/Dialog.js';
 import BookLibraryEntry from './BookLibraryEntry.js';
 import BookLibraryHeader from './bookLibraryHeader/BookLibraryHeader.js';
@@ -55,7 +55,6 @@ const BookLibrary = props => {
 
   return user ? (
     <div>
-      <h1>Books</h1>
       <BookLibraryHeader
         config={props.config}
         updateConfig={props.configUpdated}
