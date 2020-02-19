@@ -5,7 +5,7 @@ import './navbar.scss';
 const Navbar = () => {
   return (
     <nav>
-      <ul>
+      <ul className='mainNav'>
         <li>
           <Link to='/books'>books</Link>
         </li>
