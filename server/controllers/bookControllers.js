@@ -3,13 +3,19 @@ const model = require('../models/bookModels.js');
 module.exports = {
   getBooks: async (req, res) => {
     const { id } = req.user;
-    const { page = 1, limit = 5, sortBy = 'title_ASC' } = req.params;
+    const { query, page = 1, limit = 5, sortBy = 'title_ASC' } = req.query;
     const sort = sortBy.split('_')[0];
     const order = sortBy.split('_')[1];
     const offset = parseInt(page) === 1 ? 0 : page * limit;
-
     try {
-      const bookList = await model.getBookList(id, sort, order, limit, offset);
+      const bookList = await model.getBookList(
+        id,
+        query,
+        sort,
+        order,
+        limit,
+        offset
+      );
 
       res.send({ favorites: bookList });
     } catch (err) {
