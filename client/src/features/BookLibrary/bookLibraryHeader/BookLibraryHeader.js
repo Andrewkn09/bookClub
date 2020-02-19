@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import PrimaryButton from '../../shared/buttons/PrimaryButton.js';
-import PrimarySelect from '../../shared/selects/PrimarySelect.js';
+import PrimaryButton from '../../../shared/buttons/PrimaryButton.js';
+import PrimarySelect from '../../../shared/selects/PrimarySelect.js';
+
+import './header.scss';
 
 //TODO: MOVE TO ANOTHER FILE
 const sortOptions = [
@@ -43,8 +45,9 @@ const bookLibraryHeader = props => {
   };
 
   return (
-    <div>
-      <PrimaryButton description='Add Book' handleClick={props.handleAddBook} />
+    <div className='subNav'>
+      <input className='search' type='text' placeholder='Search...' />
+
       <PrimarySelect
         label='SortBy'
         name='sortBy'
@@ -60,7 +63,8 @@ const bookLibraryHeader = props => {
         onChange={handleSelect}
       />
 
-      <PrimaryButton description='Update' handleClick={props.updateList} />
+      <PrimaryButton description='Filter' handleClick={props.updateList} />
+      <PrimaryButton description='Add Book' handleClick={props.handleAddBook} />
     </div>
   );
 };

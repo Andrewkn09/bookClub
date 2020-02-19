@@ -4,7 +4,7 @@ import * as actions from './bookLibraryActions.js';
 import BookLibraryList from './BookLibraryList.js';
 import Dialog from '../../shared/dialog/Dialog.js';
 import BookLibraryEntry from './BookLibraryEntry.js';
-import BookLibraryHeader from './BookLibraryHeader.js';
+import BookLibraryHeader from './bookLibraryHeader/BookLibraryHeader.js';
 
 const BookLibrary = props => {
   const { user, books, booksFetched, bookPosted } = props;

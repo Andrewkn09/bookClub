@@ -1,0 +1,11 @@
+.subNav {
+  display: flex;
+
+  > * {
+    margin-left: 1em;
+  }
+
+  .search {
+    margin-left: 0;
+  }
+}
