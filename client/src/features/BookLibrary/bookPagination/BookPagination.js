@@ -1,5 +1,9 @@
 import React, { Fragment } from 'react';
 
+import './pagination.scss';
+
+//TODO: INCLUDE TOTALPAGES FROM API AND UPDATE
+
 const BookPagination = ({
   config,
   totalPages = 9,
@@ -35,7 +39,7 @@ const BookPagination = ({
     updateConfig({ ...config, page: Number(e.target.value) });
   };
   return (
-    <div>
+    <div className='pagination'>
       {page > 1 ? (
         <Fragment>
           <button value={1} onClick={handleClick}>
@@ -51,10 +55,15 @@ const BookPagination = ({
           <button disabled>{'<'}</button>
         </Fragment>
       )}
-      {buttonRange.map(page => {
+      {buttonRange.map(pageNum => {
         return (
-          <button key={page} value={page} onClick={handleClick}>
-            {page}
+          <button
+            key={pageNum}
+            value={pageNum}
+            onClick={handleClick}
+            className={page === pageNum ? 'selectedPageBtn' : 'pageBtn'}
+          >
+            {pageNum}
           </button>
         );
       })}
