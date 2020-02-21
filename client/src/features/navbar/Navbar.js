@@ -6,8 +6,8 @@ const Navbar = () => {
   return (
     <nav>
       <ul className='mainNav'>
-        <li>
-          <Link to='/books'>books</Link>
+        <li className='title'>
+          <Link to='/books'>Book Club</Link>
         </li>
         <div className='authHeader'>
           <li>
