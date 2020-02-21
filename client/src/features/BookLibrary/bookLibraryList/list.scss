@@ -1,9 +1,9 @@
 .bookList {
+  border-bottom: 1px solid black;
   display: grid;
-  // gap: 1em 2em;
+  grid-template-columns: repeat(1, 1fr);
   height: 70vh;
   overflow-y: scroll;
-  border-bottom: 1px solid black;
 
   li {
     display: flex;
@@ -17,12 +17,15 @@
     }
   }
 
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(1, 1fr);
+  @media (max-width: 992px) {
+    li:nth-child(odd) {
+      background-color: rgb(176, 214, 255);
+    }
   }
 
-  @media (min-width: 992px) {
+  @media (min-width: 992px) and (max-width: 1450px) {
     grid-template-columns: repeat(2, 1fr);
+
     li:nth-child(4n - 3),
     li:nth-child(4n) {
       background-color: rgb(176, 214, 255);
@@ -31,5 +34,9 @@
 
   @media (min-width: 1450px) {
     grid-template-columns: repeat(3, 1fr);
+
+    li:nth-child(odd) {
+      background-color: rgb(176, 214, 255);
+    }
   }
 }
