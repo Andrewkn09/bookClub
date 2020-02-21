@@ -16,8 +16,6 @@ function App(props) {
 
   return (
     <div className='mainContainer'>
-      <h1>Book Clubs</h1>
-
       <Navbar className='nav' />
 
       <Switch>
