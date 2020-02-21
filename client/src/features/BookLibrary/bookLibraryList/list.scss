@@ -1,15 +1,15 @@
 .bookList {
   display: grid;
-  gap: 1em 2em;
+  // gap: 1em 2em;
   height: 70vh;
   overflow-y: scroll;
   border-bottom: 1px solid black;
 
   li {
-    margin-bottom: 0.5em;
     display: flex;
     flex-flow: column wrap;
     justify-content: space-between;
+    padding: 1em;
 
     .bookModifiers {
       display: flex;
@@ -23,6 +23,10 @@
 
   @media (min-width: 992px) {
     grid-template-columns: repeat(2, 1fr);
+    li:nth-child(4n - 3),
+    li:nth-child(4n) {
+      background-color: rgb(176, 214, 255);
+    }
   }
 
   @media (min-width: 1450px) {
