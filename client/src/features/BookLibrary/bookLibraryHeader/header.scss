@@ -1,11 +1,19 @@
 .subNav {
   display: flex;
-
-  > * {
+  flex-flow: row wrap;
+  margin-bottom: 0.5em;
+  :nth-child(n) {
     margin-left: 1em;
   }
 
   .search {
     margin-left: 0;
+    padding: 1.2% 15%;
+    font-size: 1em;
+  }
+
+  .sortBy,
+  .limit {
+    font: inherit;
   }
 }
