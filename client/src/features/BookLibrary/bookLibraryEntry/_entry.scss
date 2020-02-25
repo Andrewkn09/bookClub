@@ -1,0 +1,11 @@
+.formWrapper {
+  .entryForm {
+    display: flex;
+    flex-flow: column wrap;
+
+    input {
+      flex: 0 0 2fr;
+      margin-bottom: 6%;
+    }
+  }
+}
