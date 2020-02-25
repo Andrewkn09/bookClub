@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Dialog from '../../../shared/dialog/Dialog.js';
-import BookLibraryEntry from '../BookLibraryEntry.js';
+import BookLibraryEntry from '../bookLibraryEntry/BookLibraryEntry.js';
 
 import './list.scss';
 
