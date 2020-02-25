@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from './bookLibraryActions.js';
 import BookLibraryList from './bookLibraryList/BookLibraryList.js';
 import Dialog from '../../shared/dialog/Dialog.js';
-import BookLibraryEntry from './BookLibraryEntry.js';
+import BookLibraryEntry from './bookLibraryEntry/BookLibraryEntry.js';
 import BookLibraryHeader from './bookLibraryHeader/BookLibraryHeader.js';
 import BookPagination from './bookPagination/BookPagination.js';
 
