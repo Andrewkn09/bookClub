@@ -3,10 +3,11 @@ const model = require('../models/bookModels.js');
 module.exports = {
   getBooks: async (req, res) => {
     const { id } = req.user;
-    const { query, page = 1, limit = 5, sortBy = 'title_ASC' } = req.query;
+    const { query, page = 0, limit = 5, sortBy = 'title_ASC' } = req.query;
     const sort = sortBy.split('_')[0];
     const order = sortBy.split('_')[1];
-    const offset = parseInt(page) === 1 ? 0 : page * limit;
+    const offset = page * limit;
+
     try {
       const bookList = await model.getBookList(
         id,
@@ -17,7 +18,16 @@ module.exports = {
         offset
       );
 
-      res.send({ favorites: bookList });
+      const { count } = await model.getBookCount(id, query);
+      const total_pages = Math.ceil(Number(count) / limit);
+
+      const result = {
+        total_pages: total_pages,
+        total_count: Number(count),
+        favorites: bookList,
+      };
+
+      res.send(result);
     } catch (err) {
       console.log(err);
       res.sendStatus(500);
