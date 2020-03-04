@@ -66,13 +66,14 @@ const BookLibrary = props => {
         <BookLibraryEntry postBookAndUpdate={postBookAndUpdate} />
       </Dialog>
       <BookLibraryList
-        bookList={books}
+        bookList={books.favorites}
         updateBookAndUpdate={updateBookAndUpdate}
         deleteBookAndUpdate={deleteBookAndUpdate}
       />
       <BookPagination
         config={props.config}
         updateConfig={props.configUpdated}
+        totalPages={props.books.total_pages}
       />
     </div>
   ) : (
