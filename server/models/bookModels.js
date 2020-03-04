@@ -16,6 +16,15 @@ module.exports = {
       [userId, sort.toLowerCase(), order, limit, offset, query]
     );
   },
+  getBookCount: async (userId, query) => {
+    return await db.one(
+      `
+    SELECT count(*) from books
+      WHERE userId = $1
+    `,
+      [userId]
+    );
+  },
   addBook: async (title, authorId, genreId, userId, notes) => {
     return await db.none(
       `INSERT INTO books (title, author, genre, userid, notes) 
