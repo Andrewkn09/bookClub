@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Dialog from '../../../shared/dialog/Dialog.js';
 import BookLibraryEntry from '../bookLibraryEntry/BookLibraryEntry.js';
+import { formatDate } from '../../../shared/helpers.js';
 
 import './list.scss';
 
@@ -32,7 +33,7 @@ const BookLibraryList = props => {
               <section>
                 <p>Genre:{book.genre}</p>
                 <p>Notes:{book.notes}</p>
-                <p>Date Added: {book.date_added}</p>
+                <p>Date Added: {formatDate(book.date_added)}</p>
               </section>
             </div>
             <div className='bookModifiers'>
