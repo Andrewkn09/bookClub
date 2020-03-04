@@ -22,7 +22,7 @@ const BookLibraryList = props => {
     props.deleteBookAndUpdate(e.target.id);
   };
 
-  return (
+  return props.bookList ? (
     <ul className='bookList'>
       {props.bookList.map((book, i) => {
         return (
@@ -54,6 +54,8 @@ const BookLibraryList = props => {
         />
       </Dialog>
     </ul>
+  ) : (
+    <h1>Loading</h1>
   );
 };
 
