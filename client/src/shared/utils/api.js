@@ -13,7 +13,7 @@ export const fetchBooks = async config => {
   return await axios.get(`/api/books`, {
     params: {
       query: query,
-      page: page,
+      page: page - 1,
       limit: limit,
       sortBy: sortBy,
     },
