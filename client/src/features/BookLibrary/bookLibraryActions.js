@@ -26,7 +26,7 @@ export const booksFetched = () => async (dispatch, getState) => {
 
     dispatch({
       type: BOOKS_FETCHED,
-      payload: data.favorites,
+      payload: data,
     });
   } catch (err) {
     console.log(err);
