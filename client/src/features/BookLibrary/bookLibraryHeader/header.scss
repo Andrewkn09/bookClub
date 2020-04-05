@@ -1,6 +1,6 @@
 .subNav {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   margin-bottom: 0.5em;
   :nth-child(n) {
     margin-left: 1em;
@@ -8,8 +8,10 @@
 
   .search {
     margin-left: 0;
-    padding: 1.2% 15%;
+    width: 50%;
+    padding-left: 1%;
     font-size: 1em;
+    text-align: left;
   }
 
   .sortBy,
