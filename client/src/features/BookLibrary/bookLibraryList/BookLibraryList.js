@@ -5,11 +5,11 @@ import { formatDate } from '../../../shared/helpers.js';
 
 import './list.scss';
 
-const BookLibraryList = props => {
+const BookLibraryList = (props) => {
   const [isOpen, toggleDialog] = useState(false);
   const [selectedBook, selectBook] = useState(null);
 
-  const handleOpenDialog = e => {
+  const handleOpenDialog = (e) => {
     selectBook(props.bookList[e.target.id]);
     toggleDialog(true);
   };
@@ -18,7 +18,7 @@ const BookLibraryList = props => {
     toggleDialog(false);
   };
 
-  const handleDelete = e => {
+  const handleDelete = (e) => {
     props.deleteBookAndUpdate(e.target.id);
   };
 
@@ -32,7 +32,7 @@ const BookLibraryList = props => {
               <h4>Author: {book.author}</h4>
               <section>
                 <p>Genre:{book.genre}</p>
-                <p>Notes:{book.notes}</p>
+                <p className='notes'>Notes:{book.notes}</p>
                 <p>Date Added: {formatDate(book.date_added)}</p>
               </section>
             </div>
