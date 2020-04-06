@@ -1,11 +1,14 @@
 import React from 'react';
+import './_buttons.scss';
 
-const PrimaryButton = props => {
+const PrimaryButton = (props) => {
   const { description = 'Primary Button', handleClick } = props;
 
   return (
     <React.Fragment>
-      <button onClick={handleClick}>{description}</button>
+      <button className='primary-button' onClick={handleClick}>
+        {description}
+      </button>
     </React.Fragment>
   );
 };

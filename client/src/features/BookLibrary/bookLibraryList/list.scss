@@ -11,6 +11,13 @@
     justify-content: space-between;
     padding: 1em;
 
+    .bookDescriptions {
+      .notes {
+        max-height: 3em;
+        overflow: scroll;
+      }
+    }
+
     .bookModifiers {
       display: flex;
       justify-content: flex-end;
